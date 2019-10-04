@@ -10,7 +10,9 @@ public abstract class Compte {
     public Compte(int id, float solde) {
     }
 
-    public abstract void versement(int montant);
+    public void versement(int montant) {
+        solde += montant;
+    }
     public abstract void retrait(int montant);
     public abstract void log(ArrayList<String> logs);
 
@@ -21,5 +23,21 @@ public abstract class Compte {
         sb.append(", solde=").append(solde);
         sb.append('}');
         return sb.toString();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public float getSolde() {
+        return solde;
+    }
+
+    public void setSolde(float solde) {
+        this.solde = solde;
     }
 }

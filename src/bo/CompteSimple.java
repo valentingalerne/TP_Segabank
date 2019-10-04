@@ -12,17 +12,22 @@ public class CompteSimple extends Compte {
     }
 
     @Override
-    public void versement(int montant) {
-
-    }
-
-    @Override
     public void retrait(int montant) {
-
+        if (getSolde() - montant > decouvert) {
+            super.solde -= montant;
+        }
     }
 
     @Override
     public void log(ArrayList<String> logs) {
 
+    }
+
+    public float getDecouvert() {
+        return decouvert;
+    }
+
+    public void setDecouvert(float decouvert) {
+        this.decouvert = decouvert;
     }
 }
