@@ -7,13 +7,19 @@ public abstract class Compte {
     protected int id;
     protected float solde;
 
+    public Compte(){
+
+    }
+
     public Compte(int id, float solde) {
     }
 
     public void versement(int montant) {
         solde += montant;
     }
-    public abstract void retrait(int montant);
+    public void retrait(int montant) {
+        solde -= montant;
+    }
     public abstract void log(ArrayList<String> logs);
 
     @Override
