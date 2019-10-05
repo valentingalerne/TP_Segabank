@@ -12,13 +12,19 @@ public abstract class Compte {
     }
 
     public Compte(int id, float solde) {
+        this.id = id;
+        this.solde = solde;
     }
 
-    public void versement(int montant) {
+    public void versement(float montant) {
         solde += montant;
     }
-    public void retrait(int montant) {
-        solde -= montant;
+    public void retrait(float montant) {
+        if (getSolde() - montant >= 0) {
+            solde -= montant;
+        } else {
+            System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
+        }
     }
     public abstract void log(ArrayList<String> logs);
 

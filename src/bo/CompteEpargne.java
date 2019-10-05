@@ -24,6 +24,16 @@ public class CompteEpargne extends Compte {
 
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CompteEpargne{");
+        sb.append("id=").append(getId());
+        sb.append(", solde=").append(getSolde());
+        sb.append(", tauxInteret=").append(tauxInteret);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public float getTauxInteret() {
         return tauxInteret;
     }

@@ -22,8 +22,8 @@ public class CompteEpargneDAO implements IDAO<Long, CompteEpargne> {
         if (connection != null) {
             try (PreparedStatement ps = connection
                     .prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, compteEpargne.getSolde());
-                ps.setInt(2, compteEpargne.getTauxInteret());
+                ps.setFloat(1, compteEpargne.getSolde());
+                ps.setFloat(2, compteEpargne.getTauxInteret());
                 ps.executeUpdate();
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -40,8 +40,8 @@ public class CompteEpargneDAO implements IDAO<Long, CompteEpargne> {
         Connection connection = PersistenceManager.getConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(UPDATE_QUERY)) {
-                ps.setInt(1, compteEpargne.getSolde());
-                ps.setInt(2, compteEpargne.getTauxInteret());
+                ps.setFloat(1, compteEpargne.getSolde());
+                ps.setFloat(2, compteEpargne.getTauxInteret());
                 ps.setInt(3, compteEpargne.getId());
                 ps.executeUpdate();
             }

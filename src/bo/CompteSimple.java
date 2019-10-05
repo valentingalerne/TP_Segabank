@@ -16,9 +16,9 @@ public class CompteSimple extends Compte {
     }
 
     @Override
-    public void retrait(int montant) {
-        if (getSolde() - montant > decouvert) {
-            super.solde -= montant;
+    public void retrait(float montant) {
+        if (getSolde() - montant > (-decouvert)) {
+            solde -= montant;
         } else {
             System.out.println("Retrait impossible, découvert atteint");
         }
@@ -27,6 +27,16 @@ public class CompteSimple extends Compte {
     @Override
     public void log(ArrayList<String> logs) {
 
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CompteSimple{");
+        sb.append("id=").append(getId());
+        sb.append(", solde=").append(getSolde());
+        sb.append(", decouvert=").append(decouvert);
+        sb.append('}');
+        return sb.toString();
     }
 
     public float getDecouvert() {
