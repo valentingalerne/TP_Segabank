@@ -50,6 +50,8 @@ public class App {
                 dspMainMenu();
                 break;
             case 2:
+                deleteCompte();
+                dspMainMenu();
                 break;
             case 3:
                 break;
@@ -153,7 +155,7 @@ public class App {
     }
 
     private static void listAgences() {
-
+        
     }
 
     private static float saisieFloat() {

@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public abstract class Compte implements Log {
+public abstract class Compte {
 
+    public static final String FILE_LOG = "./resources/log.csv";
     private int id;
     private float solde;
     private int type;
@@ -51,7 +52,6 @@ public abstract class Compte implements Log {
         return sb.toString();
     }
 
-    @Override
     public void addLog(String str) {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");

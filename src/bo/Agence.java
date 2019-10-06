@@ -9,6 +9,9 @@ public class Agence {
     private String address;
     private List<Compte> comptes;
 
+    public Agence() {
+    }
+
     public Agence(int id, String code, String address, List<Compte> comptes) {
         this.id = id;
         this.code = code;

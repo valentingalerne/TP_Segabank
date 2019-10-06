@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class CompteSimple extends Compte implements Log {
+public class CompteSimple extends Compte {
 
     private float decouvert;
 
