@@ -36,10 +36,10 @@ public abstract class Compte {
     public void retrait(float montant) {
         if (getSolde() - montant >= 0) {
             solde -= montant;
+            addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
         } else {
             System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
         }
-        addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
     }
 
     public abstract void log(ArrayList<String> logs);

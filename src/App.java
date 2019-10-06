@@ -341,14 +341,22 @@ public class App {
     private static void getComptesByAgence() throws SQLException, IOException, ClassNotFoundException {
         AgenceDAO agenceDAO = new AgenceDAO();
         List<Agence> agenceList = agenceDAO.findAll();
+        int idAgence = 0;
+        int mauvaisID = 0;
 
         System.out.println("Liste des agences : ");
         for (Agence a : agenceList) {
             System.out.println(a.toString());
         }
 
-        System.out.print("Choisissez l'id d'une agence : ");
-        int idAgence = saisieInt();
+        System.out.print("Choisissez l'id d'une agence pour lister ses comptes : ");
+        do {
+            if (mauvaisID > 0) {
+                System.out.print("Mauvais id, veuillez saisir un id valide : ");
+            }
+            idAgence = saisieInt();
+            mauvaisID++;
+        } while (agenceDAO.findById(idAgence) == null);
         List<Compte> comptes = agenceDAO.findCompte(idAgence);
         for (Compte c : comptes) {
             System.out.println(c.toString());
