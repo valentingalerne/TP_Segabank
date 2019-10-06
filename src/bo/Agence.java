@@ -25,7 +25,6 @@ public class Agence {
         sb.append("id=").append(id);
         sb.append(", code='").append(code).append('\'');
         sb.append(", address='").append(address).append('\'');
-        sb.append(",\ncomptes=").append(comptes);
         sb.append('}');
         return sb.toString();
     }
