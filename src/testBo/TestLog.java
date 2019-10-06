@@ -8,7 +8,7 @@ public class TestLog {
 
         CompteSimple compteSimple;
 
-        compteSimple = new CompteSimple(1250.47f, 400f);
+        compteSimple = new CompteSimple(1250.47f, 400f, 1);
         compteSimple.versement(600f);
         compteSimple.retrait(480.47f);
     }

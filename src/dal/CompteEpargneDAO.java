@@ -79,7 +79,7 @@ public class CompteEpargneDAO implements IDAO<Long, CompteEpargne> {
 
                         AgenceDAO agenceDAO = null;
                         Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
-                        compteEpargne.setAgence(agence);
+                        compteEpargne.setIdAgence(agence.getId());
                     }
                 }
             }
@@ -103,7 +103,7 @@ public class CompteEpargneDAO implements IDAO<Long, CompteEpargne> {
 
                         AgenceDAO agenceDAO = null;
                         Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
-                        compteEpargne.setAgence(agence);
+                        compteEpargne.setIdAgence(agence.getId());
 
                         list.add(compteEpargne);
                     }
