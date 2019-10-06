@@ -16,7 +16,9 @@ public class CompteEpargne extends Compte {
     }
 
     public void calculInteret() {
-        setSolde(getSolde() + (getSolde() * (tauxInteret / 100)));
+        float interet = getSolde() + (getSolde() * (tauxInteret / 100));
+        setSolde(interet);
+        addLog("interets de" + interet + " euros sur le compte d'id " + getId());
     }
 
     @Override

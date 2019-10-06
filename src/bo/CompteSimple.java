@@ -1,8 +1,14 @@
 package bo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class CompteSimple extends Compte {
+public class CompteSimple extends Compte implements Log {
 
     private float decouvert;
 
@@ -22,6 +28,7 @@ public class CompteSimple extends Compte {
         } else {
             System.out.println("Retrait impossible, découvert atteint");
         }
+        addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
     }
 
     @Override
@@ -46,4 +53,5 @@ public class CompteSimple extends Compte {
     public void setDecouvert(float decouvert) {
         this.decouvert = decouvert;
     }
+
 }

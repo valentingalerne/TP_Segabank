@@ -1,13 +1,22 @@
 package bo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public abstract class Compte {
+public abstract class Compte implements Log {
 
     private int id;
     private float solde;
 
-    public Compte(){
+    public Compte() {
 
     }
 
@@ -18,14 +27,18 @@ public abstract class Compte {
 
     public void versement(float montant) {
         solde += montant;
+        addLog("versement de " + montant + " euros sur le compte d'id " + getId());
     }
+
     public void retrait(float montant) {
         if (getSolde() - montant >= 0) {
             solde -= montant;
         } else {
             System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
         }
+        addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
     }
+
     public abstract void log(ArrayList<String> logs);
 
     @Override
@@ -35,6 +48,40 @@ public abstract class Compte {
         sb.append(", solde=").append(solde);
         sb.append("}\n");
         return sb.toString();
+    }
+
+    @Override
+    public void addLog(String str) {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        System.out.println(dtf.format(now));
+
+        try (FileWriter writer = new FileWriter(FILE_LOG, true);
+             BufferedWriter bw = new BufferedWriter(writer)) {
+            bw.write(dtf.format(now));
+            bw.write(" = ");
+            bw.write(str);
+            bw.newLine();
+
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+
+//        Path outPath = Paths.get(FILE_LOG);
+//        try (BufferedReader br = new BufferedReader(Files.newBufferedReader(outPath));
+//             BufferedWriter bw = new BufferedWriter(Files.newBufferedWriter(outPath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                bw.write(str);
+//                System.out.println(str);
+//                bw.newLine();
+//            }
+//            bw.write(str);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public int getId() {
