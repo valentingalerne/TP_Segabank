@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 06 oct. 2019 à 11:35
+-- Généré le :  Dim 06 oct. 2019 à 11:52
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.1.22
 
@@ -31,25 +31,8 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `agence`;
 CREATE TABLE IF NOT EXISTS `agence` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` int(10) NOT NULL,
+  `code` varchar(30) NOT NULL,
   `adresse` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `compte`
---
-
-DROP TABLE IF EXISTS `compte`;
-CREATE TABLE IF NOT EXISTS `compte` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `solde` float NOT NULL,
-  `decouvert` float DEFAULT NULL,
-  `taux_interet` float DEFAULT NULL,
-  `type` int(1) NOT NULL,
-  `id_agence` int(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
