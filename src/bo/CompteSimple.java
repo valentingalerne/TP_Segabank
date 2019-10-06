@@ -16,9 +16,10 @@ public class CompteSimple extends Compte implements Log {
 
     }
 
-    public CompteSimple(int id, float solde, float decouvert) {
-        super(id, solde);
+    public CompteSimple(float solde, float decouvert) {
+        super(solde);
         this.decouvert = decouvert;
+        setType(1);
     }
 
     @Override

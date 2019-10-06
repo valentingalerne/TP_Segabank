@@ -15,13 +15,14 @@ public abstract class Compte implements Log {
 
     private int id;
     private float solde;
+    private int type;
+    private Agence agence;
 
     public Compte() {
 
     }
 
-    public Compte(int id, float solde) {
-        this.id = id;
+    public Compte(float solde) {
         this.solde = solde;
     }
 
@@ -84,6 +85,10 @@ public abstract class Compte implements Log {
 //        }
     }
 
+    public int getIdAgence(){
+        return agence.getId();
+    }
+
     public int getId() {
         return id;
     }
@@ -98,5 +103,21 @@ public abstract class Compte implements Log {
 
     public void setSolde(float solde) {
         this.solde = solde;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Agence getAgence() {
+        return agence;
+    }
+
+    public void setAgence(Agence agence) {
+        this.agence = agence;
     }
 }

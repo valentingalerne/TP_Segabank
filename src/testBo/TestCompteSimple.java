@@ -11,7 +11,7 @@ public class TestCompteSimple {
 
         System.out.println("==================================================");
         System.out.printf("%nTest unitaire - création d'un compte simple%n");
-        compteSimple = new CompteSimple(1, 1250.47f, 400f);
+        compteSimple = new CompteSimple(1250.47f, 400f);
         System.out.println(compteSimple.toString());
         System.out.println("==================================================");
 
