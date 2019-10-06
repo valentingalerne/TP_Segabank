@@ -203,13 +203,24 @@ public class App {
         ComptePayant comptePayant = null;
         ComptePayantDAO comptePayantDAO = new ComptePayantDAO();
 
+        boolean exist = false;
+        int id = 0;
+        CompteDAO compte = null;
+
         System.out.println("Liste des comptes : ");
         listComptes();
 
-        System.out.print("Saisir l'id du compte à utiliser : ");
-        int id = saisieInt();
+        while (!exist) {
+            System.out.print("Saisir l'id du compte à utiliser : ");
+            id = saisieInt();
 
-        CompteDAO compte = new CompteDAO();
+            compte = new CompteDAO();
+
+            exist = compte.exist(id);
+            if (!exist) {
+                System.out.println("Ce compte n'existe pas !");
+            }
+        }
         int type = compte.getType(id);
 
         switch (type) {
@@ -224,11 +235,15 @@ public class App {
                 break;
         }
 
-        System.out.println("Que voulez-vous faire ?");
-        System.out.println("1 - Retrait");
-        System.out.println("2 - Virement");
-        System.out.print("Votre choix : ");
-        int choix = saisieInt();
+        int choix = 0;
+        while (choix != 1 && choix != 2 && choix != 3) {
+            System.out.println("Que voulez-vous faire ?");
+            System.out.println("1 - Retrait");
+            System.out.println("2 - Virement");
+            System.out.println("3 - Sortir");
+            System.out.print("Votre choix : ");
+            choix = saisieInt();
+        }
 
         switch (choix) {
             case 1 :
