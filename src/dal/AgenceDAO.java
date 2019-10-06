@@ -1,13 +1,12 @@
 package dal;
-import bo.Agence;
-import bo.Compte;
+import bo.*;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgenceDAO implements IDAO<Long, Agence> {
+public class AgenceDAO implements IDAO<Integer, Agence> {
 
     private static final String INSERT_QUERY = "INSERT INTO agence (code, adresse) VALUES(?,?)";
     private static final String UPDATE_QUERY = "UPDATE agence SET code = ?, adresse = ? WHERE id = ?";
@@ -61,7 +60,7 @@ public class AgenceDAO implements IDAO<Long, Agence> {
     }
 
     @Override
-    public Agence findById(int id) throws SQLException, IOException, ClassNotFoundException {
+    public Agence findById(Integer id) throws SQLException, IOException, ClassNotFoundException {
         Agence agence = null;
         Connection connection = PersistenceManager.getConnection();
         if (connection != null) {
@@ -110,12 +109,32 @@ public class AgenceDAO implements IDAO<Long, Agence> {
                     ps.setInt(1, id);
 
                     while (rs.next()) {
-                        Compte compte = new Compte();
-                        compte.setId(rs.getInt("id"));
-                        compte.setSolde(rs.getFloat("solde"));
-                        compte.setType(rs.getInt("type"));
-
-                        list.add(compte);
+                        switch (rs.getInt("type")) {
+                            case 1 :
+                                CompteEpargne compteEpagne = new CompteEpargne();
+                                compteEpagne.setId(rs.getInt("id"));
+                                compteEpagne.setSolde(rs.getFloat("solde"));
+                                compteEpagne.setType(rs.getInt("type"));
+                                compteEpagne.setTauxInteret(rs.getInt("taux_interet"));
+                                list.add(compteEpagne);
+                                break;
+                            case 2 :
+                                CompteSimple compteSimple = new CompteSimple();
+                                compteSimple.setId(rs.getInt("id"));
+                                compteSimple.setSolde(rs.getFloat("solde"));
+                                compteSimple.setType(rs.getInt("type"));
+                                compteSimple.setDecouvert(rs.getFloat("decouvert"));
+                                list.add(compteSimple);
+                                break;
+                            case 3 :
+                                ComptePayant comptePayant = new ComptePayant();
+                                comptePayant.setId(rs.getInt("id"));
+                                comptePayant.setSolde(rs.getFloat("solde"));
+                                comptePayant.setType(rs.getInt("type"));
+                                list.add(comptePayant);
+                                break;
+                        }
+                        
                     }
                 }
             }
