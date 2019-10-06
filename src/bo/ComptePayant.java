@@ -17,19 +17,27 @@ public class ComptePayant extends Compte {
 
     @Override
     public void versement(float montant) {
-        setSolde(getSolde() + (montant - (montant * FRAIS_TRANSACTION)));
-        addLog("versement de " + montant + " euros sur le compte d'id " + getId());
+        if (montant > 0) {
+            setSolde(getSolde() + (montant - (montant * FRAIS_TRANSACTION)));
+            addLog("versement de " + montant + " euros sur le compte d'id " + getId());
+        } else {
+            System.out.println("Un virement ne peux pas être négatif !");
+        }
     }
 
     @Override
     public void retrait(float montant) {
-        float montantAvecFrais = (montant + (montant * FRAIS_TRANSACTION));
-        if (getSolde() - montantAvecFrais >= 0) {
-            setSolde(getSolde() - montantAvecFrais);
+        if (montant > 0) {
+            float montantAvecFrais = (montant + (montant * FRAIS_TRANSACTION));
+            if (getSolde() - montantAvecFrais >= 0) {
+                setSolde(getSolde() - montantAvecFrais);
+            } else {
+                System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
+            }
+            addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
         } else {
-            System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
+            System.out.println("Un virement ne peux pas être négatif !");
         }
-        addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
     }
 
     @Override

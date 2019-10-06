@@ -141,4 +141,21 @@ public class AgenceDAO implements IDAO<Integer, Agence> {
         }
         return list;
     }
+
+    public boolean exist(int id) throws SQLException, IOException, ClassNotFoundException  {
+        Connection connection = PersistenceManager.getConnection();
+        if (connection != null) {
+            try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
+                ps.setInt(1, id);
+
+                try (ResultSet rs = ps.executeQuery()) {
+
+                    //return true si existe
+                    return rs.next();
+                }
+            }
+        }
+
+        return false;
+    }
 }

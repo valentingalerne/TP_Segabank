@@ -24,12 +24,16 @@ public class CompteSimple extends Compte {
 
     @Override
     public void retrait(float montant) {
-        if (getSolde() - montant > (-decouvert)) {
-            setSolde(getSolde() - montant);
+        if (montant > 0) {
+            if (getSolde() - montant > (-decouvert)) {
+                setSolde(getSolde() - montant);
+            } else {
+                System.out.println("Retrait impossible, découvert atteint");
+            }
+            addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
         } else {
-            System.out.println("Retrait impossible, découvert atteint");
+            System.out.println("Un virement ne peux pas être négatif !");
         }
-        addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
     }
 
     @Override
