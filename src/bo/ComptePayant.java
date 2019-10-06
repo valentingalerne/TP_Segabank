@@ -16,14 +16,14 @@ public class ComptePayant extends Compte {
 
     @Override
     public void versement(float montant) {
-        solde += (montant - (montant * FRAIS_TRANSACTION));
+        setSolde(getSolde() + (montant - (montant * FRAIS_TRANSACTION)));
     }
 
     @Override
     public void retrait(float montant) {
         float montantAvecFrais = (montant + (montant * FRAIS_TRANSACTION));
         if (getSolde() - montantAvecFrais >= 0) {
-            solde -= montantAvecFrais;
+            setSolde(getSolde() - montantAvecFrais);
         } else {
             System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
         }
@@ -40,7 +40,7 @@ public class ComptePayant extends Compte {
         final StringBuilder sb = new StringBuilder("ComptePayant{");
         sb.append("id=").append(getId());
         sb.append(", solde=").append(getSolde());
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 }

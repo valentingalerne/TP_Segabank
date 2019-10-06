@@ -30,7 +30,7 @@ public class CompteEpargne extends Compte {
         sb.append("id=").append(getId());
         sb.append(", solde=").append(getSolde());
         sb.append(", tauxInteret=").append(tauxInteret);
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 

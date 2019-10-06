@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public abstract class Compte {
 
-    protected int id;
-    protected float solde;
+    private int id;
+    private float solde;
 
     public Compte(){
 
@@ -33,7 +33,7 @@ public abstract class Compte {
         final StringBuilder sb = new StringBuilder("Compte{");
         sb.append("id=").append(id);
         sb.append(", solde=").append(solde);
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 

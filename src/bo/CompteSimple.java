@@ -18,7 +18,7 @@ public class CompteSimple extends Compte {
     @Override
     public void retrait(float montant) {
         if (getSolde() - montant > (-decouvert)) {
-            solde -= montant;
+            setSolde(getSolde() - montant);
         } else {
             System.out.println("Retrait impossible, découvert atteint");
         }
@@ -35,7 +35,7 @@ public class CompteSimple extends Compte {
         sb.append("id=").append(getId());
         sb.append(", solde=").append(getSolde());
         sb.append(", decouvert=").append(decouvert);
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 
