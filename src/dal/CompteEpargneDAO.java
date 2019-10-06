@@ -77,7 +77,7 @@ public class CompteEpargneDAO implements IDAO<Integer, CompteEpargne> {
                         compteEpargne.setTauxInteret(rs.getFloat("taux_interet"));
                         compteEpargne.setType(rs.getInt("type"));
 
-                        AgenceDAO agenceDAO = null;
+                        AgenceDAO agenceDAO = new AgenceDAO();
                         Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
                         compteEpargne.setIdAgence(agence.getId());
                     }
@@ -101,7 +101,7 @@ public class CompteEpargneDAO implements IDAO<Integer, CompteEpargne> {
                         compteEpargne.setTauxInteret(rs.getInt("taux_interet"));
                         compteEpargne.setType(rs.getInt("type"));
 
-                        AgenceDAO agenceDAO = null;
+                        AgenceDAO agenceDAO = new AgenceDAO();
                         Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
                         compteEpargne.setIdAgence(agence.getId());
 
