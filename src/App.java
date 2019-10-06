@@ -1,5 +1,11 @@
 import bo.*;
+import dal.CompteDAO;
+import dal.CompteEpargneDAO;
+import dal.ComptePayantDAO;
+import dal.CompteSimpleDAO;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -54,6 +60,8 @@ public class App {
                 dspMainMenu();
                 break;
             case 3:
+                selectCompte();
+                dspMainMenu();
                 break;
             case 4:
                 listComptes();
@@ -141,13 +149,85 @@ public class App {
         }
     }
 
-    private static void deleteCompte() {
+    private static void deleteCompte() throws SQLException, IOException, ClassNotFoundException {
+        System.out.println("Liste des comptes : ");
+        listComptes();
+
+        System.out.print("Saisir l'id du compte à supprimer : ");
+        int id = saisieInt();
+
+        CompteDAO compte = new CompteDAO();
+        int type = compte.getType(id);
+
+        switch (type) {
+            case 1 :
+                CompteEpargneDAO compteEpagneDAO = new CompteEpargneDAO();
+                CompteEpargne compteEpargne = compteEpagneDAO.findById(id);
+
+                compteEpagneDAO.remove(compteEpargne);
+                System.out.println("Compte Supprimé !");
+                break;
+            case 2 :
+                CompteSimpleDAO compteSimpleDAO = new CompteSimpleDAO();
+                CompteSimple compteSimple = compteSimpleDAO.findById(id);
+
+                compteSimpleDAO.remove(compteSimple);
+                System.out.println("Compte Supprimé !");
+                break;
+            case 3 :
+                ComptePayantDAO comptePayantDAO = new ComptePayantDAO();
+                ComptePayant comptePayant = comptePayantDAO.findById(id);
+
+                comptePayantDAO.remove(comptePayant);
+                System.out.println("Compte Supprimé !");
+                break;
+            case -1 :
+                System.out.println("Le compte saisie n'existe pas !");
+                break;
+        }
+    }
+
+    private static void selectCompte() throws SQLException, IOException, ClassNotFoundException {
+        System.out.println("Liste des comptes : ");
+        listComptes();
+
+        System.out.print("Saisir l'id du compte à utiliser : ");
+        int id = saisieInt();
+
+        CompteDAO compte = new CompteDAO();
+        int type = compte.getType(id);
+
+        while (type == -1 ) {
+            switch (type) {
+                case 1 :
+                    CompteEpargneDAO compteEpagneDAO = new CompteEpargneDAO();
+                    CompteEpargne compteEpargne = compteEpagneDAO.findById(id);
+                    break;
+                case 2 :
+                    CompteSimpleDAO compteSimpleDAO = new CompteSimpleDAO();
+                    CompteSimple compteSimple = compteSimpleDAO.findById(id);
+                    break;
+                case 3 :
+                    ComptePayantDAO comptePayantDAO = new ComptePayantDAO();
+                    ComptePayant comptePayant = comptePayantDAO.findById(id);
+                    break;
+            }
+        }
+
+        System.out.println("Que voulez-vous faire ?");
+        System.out.println("1 - Retrait");
+        System.out.println("2 - Virement");
+        System.out.print("Votre choix : ");
+        int choix = saisieInt();
 
     }
 
-    private static void listComptes() {
-        System.out.println(comptes.toString());
-
+    private static void listComptes() throws SQLException, IOException, ClassNotFoundException {
+        CompteDAO compte = new CompteDAO();
+        List<Compte> list = compte.findAll();
+        for (Compte c : list) {
+            System.out.println(c.toString());
+        }
     }
 
     private static void getComptesByAgence() {

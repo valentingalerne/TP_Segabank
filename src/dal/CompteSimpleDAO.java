@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompteSimpleDAO  implements IDAO<Long, CompteSimple> {
+public class CompteSimpleDAO  implements IDAO<Integer, CompteSimple> {
 
     private static final String INSERT_QUERY = "INSERT INTO compte (solde, decouvert, type, id_agence) VALUES(?,?,?,?)";
     private static final String UPDATE_QUERY = "UPDATE compte SET solde = ?, decouvert = ? WHERE id = ?";
@@ -63,7 +63,7 @@ public class CompteSimpleDAO  implements IDAO<Long, CompteSimple> {
     }
 
     @Override
-    public CompteSimple findById(Long id) throws SQLException, IOException, ClassNotFoundException {
+    public CompteSimple findById(Integer id) throws SQLException, IOException, ClassNotFoundException {
         CompteSimple compteSimple = null;
         Connection connection = PersistenceManager.getConnection();
         if (connection != null) {

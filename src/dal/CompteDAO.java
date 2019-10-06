@@ -3,11 +3,15 @@ package dal;
 import bo.*;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompteDAO {
+    private static final String FIND_BY_ID_QUERY = "SELECT type FROM compte WHERE id = ?";
 
     public List<Compte> findAll() throws SQLException, IOException, ClassNotFoundException {
         List<Compte> list = new ArrayList<>();
@@ -31,5 +35,23 @@ public class CompteDAO {
         }
 
         return list;
+    }
+
+    public int getType (Integer id) throws SQLException, IOException, ClassNotFoundException {
+        Connection connection = PersistenceManager.getConnection();
+        if (connection != null) {
+            try (PreparedStatement ps = connection.prepareStatement(FIND_BY_ID_QUERY)) {
+                ps.setLong(1, id);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        int type = rs.getInt("type");
+
+                        return type;
+                    }
+                }
+            }
+        }
+
+        return -1;
     }
 }
