@@ -1,5 +1,6 @@
 package dal;
 
+import bo.Agence;
 import bo.CompteEpargne;
 
 import java.io.IOException;
@@ -75,7 +76,10 @@ public class CompteEpargneDAO implements IDAO<Long, CompteEpargne> {
                         compteEpargne.setSolde(rs.getFloat("solde"));
                         compteEpargne.setTauxInteret(rs.getFloat("taux_interet"));
                         compteEpargne.setType(rs.getInt("type"));
-                        compteEpargne.getIdAgence(rs.getInt("id_agence"));
+
+                        AgenceDAO agenceDAO = null;
+                        Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
+                        compteEpargne.setAgence(agence);
                     }
                 }
             }
@@ -96,7 +100,11 @@ public class CompteEpargneDAO implements IDAO<Long, CompteEpargne> {
                         compteEpargne.setSolde(rs.getInt("solde"));
                         compteEpargne.setTauxInteret(rs.getInt("taux_interet"));
                         compteEpargne.setType(rs.getInt("type"));
-                        compteEpargne.getIdAgence(rs.getInt("id_agence"));
+
+                        AgenceDAO agenceDAO = null;
+                        Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
+                        compteEpargne.setAgence(agence);
+                        
                         list.add(compteEpargne);
                     }
                 }
