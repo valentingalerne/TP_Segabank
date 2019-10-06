@@ -1,8 +1,5 @@
 import bo.*;
-import dal.CompteDAO;
-import dal.CompteEpargneDAO;
-import dal.ComptePayantDAO;
-import dal.CompteSimpleDAO;
+import dal.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -80,7 +77,8 @@ public class App {
         float solde;
         float decouvert;
         float interet;
-        int idAgence;
+        int idAgence = 0;
+        boolean exist = false;
 
         do {
             if (!boolMainMenu) {
@@ -114,8 +112,16 @@ public class App {
                 solde = saisieFloat();
                 System.out.print("Saisissez le montant du découvert : ");
                 decouvert = saisieFloat();
-                System.out.print("Saisissez l'id de l'agence : ");
-                idAgence = saisieInt();
+                while (!exist) {
+                    System.out.print("Saisissez l'id de l'agence : ");
+                    idAgence = saisieInt();
+
+                    AgenceDAO agence = new AgenceDAO();
+                    exist = agence.exist(idAgence);
+                    if (!exist) {
+                        System.out.println("L'agence " + idAgence + " n'existe pas !");
+                    }
+                }
                 compteSimple = new CompteSimple(solde, decouvert, idAgence);
                 compteSimpleDAO = new CompteSimpleDAO();
                 compteSimpleDAO.create(compteSimple);
@@ -128,10 +134,18 @@ public class App {
                 System.out.println("Nouveau compte épargne ...");
                 System.out.print("Saisissez le solde de votre nouveau compte : ");
                 solde = saisieFloat();
-                System.out.print("Saisissez le taux d'intérêt de votre nouveau comtpe : ");
+                System.out.print("Saisissez le taux d'intérêt de votre nouveau compte : ");
                 interet = saisieFloat();
-                System.out.print("Saisissez l'id de l'agence : ");
-                idAgence = saisieInt();
+                while (!exist) {
+                    System.out.print("Saisissez l'id de l'agence : ");
+                    idAgence = saisieInt();
+
+                    AgenceDAO agence = new AgenceDAO();
+                    exist = agence.exist(idAgence);
+                    if (!exist) {
+                        System.out.println("L'agence " + idAgence + " n'existe pas !");
+                    }
+                }
                 compteEpargne = new CompteEpargne(solde, interet, idAgence);
                 compteEpargneDAO = new CompteEpargneDAO();
                 compteEpargneDAO.create(compteEpargne);
@@ -144,8 +158,16 @@ public class App {
                 System.out.println("Nouveau compte payant ...");
                 System.out.print("Saisissez le solde de votre nouveau compte : ");
                 solde = saisieFloat();
-                System.out.print("Saisissez l'id de l'agence : ");
-                idAgence = saisieInt();
+                while (!exist) {
+                    System.out.print("Saisissez l'id de l'agence : ");
+                    idAgence = saisieInt();
+
+                    AgenceDAO agence = new AgenceDAO();
+                    exist = agence.exist(idAgence);
+                    if (!exist) {
+                        System.out.println("L'agence " + idAgence + " n'existe pas !");
+                    }
+                }
                 comptePayant = new ComptePayant(solde, idAgence);
                 comptePayantDAO = new ComptePayantDAO();
                 comptePayantDAO.create(comptePayant);

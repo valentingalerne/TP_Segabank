@@ -29,17 +29,25 @@ public abstract class Compte {
     }
 
     public void versement(float montant) {
-        solde += montant;
-        addLog("versement de " + montant + " euros sur le compte d'id " + getId());
+        if (montant > 0) {
+            solde += montant;
+            addLog("versement de " + montant + " euros sur le compte d'id " + getId());
+        } else {
+            System.out.println("Un virement ne peux pas être négatif !");
+        }
     }
 
     public void retrait(float montant) {
-        if (getSolde() - montant >= 0) {
-            solde -= montant;
+        if (montant > 0) {
+            if (getSolde() - montant >= 0) {
+                solde -= montant;
+                addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
+            } else {
+                System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
+            }
         } else {
-            System.out.println("Retrait impossible, vous n'avez pas assez d'argent");
+            System.out.println("Un retrait ne peux pas être négatif !");
         }
-        addLog("retrait de " + montant + " euros sur le compte d'id " + getId());
     }
 
     public abstract void log(ArrayList<String> logs);
@@ -69,19 +77,6 @@ public abstract class Compte {
             System.err.format("IOException: %s%n", e);
         }
 
-//        Path outPath = Paths.get(FILE_LOG);
-//        try (BufferedReader br = new BufferedReader(Files.newBufferedReader(outPath));
-//             BufferedWriter bw = new BufferedWriter(Files.newBufferedWriter(outPath))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                bw.write(str);
-//                System.out.println(str);
-//                bw.newLine();
-//            }
-//            bw.write(str);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public int getId() {
