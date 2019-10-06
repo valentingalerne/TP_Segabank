@@ -10,8 +10,9 @@ public class ComptePayant extends Compte {
 
     }
 
-    public ComptePayant(int id, float solde) {
-        super(id, solde);
+    public ComptePayant(float solde) {
+        super(solde);
+        setType(2);
     }
 
     @Override

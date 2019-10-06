@@ -23,7 +23,7 @@ public class App {
                 System.out.println("Mauvais choix, merci de recommencer");
             }
             System.out.println("+------------------------------------------------------+");
-            System.out.println("|                      Accueil - SegaBank              |");
+            System.out.println("|                    Accueil - SegaBank                |");
             System.out.println("+------------------------------------------------------+");
             System.out.println("|1 - Création d'un compte                              |");
             System.out.println("|2 - Suppression d'un compte                           |");
@@ -105,7 +105,7 @@ public class App {
                 solde = saisieFloat();
                 System.out.print("Saisissez le montant du découvert : ");
                 decouvert = saisieFloat();
-                compteSimple = new CompteSimple(id, solde, decouvert);
+                compteSimple = new CompteSimple(solde, decouvert);
                 System.out.println("Nouveau compte simple créé");
                 comptes.add(compteSimple);
                 break;
@@ -118,7 +118,7 @@ public class App {
                 solde = saisieFloat();
                 System.out.print("Saisissez le taux d'intérêt de votre nouveau comtpe : ");
                 interet = saisieFloat();
-                compteEpargne = new CompteEpargne(id, solde, interet);
+                compteEpargne = new CompteEpargne(solde, interet);
                 System.out.println("Nouveau compte épargne créé");
                 comptes.add(compteEpargne);
                 break;
@@ -129,7 +129,7 @@ public class App {
                 id = saisieInt();
                 System.out.print("Saisissez le solde de votre nouveau compte : ");
                 solde = saisieFloat();
-                comptePayant = new ComptePayant(id, solde);
+                comptePayant = new ComptePayant(solde);
                 System.out.println("Nouveau compte payant créé");
                 comptes.add(comptePayant);
                 break;
