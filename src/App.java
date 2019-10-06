@@ -395,25 +395,37 @@ public class App {
 
     private static float saisieFloat() {
         float solde = 0;
-        try {
-            solde = sc.nextFloat();
-        } catch (InputMismatchException e) {
-            e.printStackTrace();
-        } finally {
-            sc.nextLine();
-        }
+        boolean erreur = true;
+
+        do {
+            try {
+                solde = sc.nextFloat();
+            } catch (InputMismatchException e) {
+                System.err.println("La valeur saisie n'est pas bonne");
+                solde = sc.nextFloat();
+            } finally {
+                sc.nextLine();
+            }
+        } while (erreur);
+
         return solde;
     }
 
     private static int saisieInt() {
         int id = 0;
-        try {
-            id = sc.nextInt();
-        } catch (InputMismatchException e) {
-            e.printStackTrace();
-        } finally {
-            sc.nextLine();
-        }
+        boolean erreur = true;
+
+        do {
+            try {
+                id = sc.nextInt();
+                erreur = false;
+            } catch (InputMismatchException e) {
+                System.err.println("La valeur saisie n'est pas bonne");
+            } finally {
+                sc.nextLine();
+            }
+        } while (erreur);
+
         return id;
     }
 
