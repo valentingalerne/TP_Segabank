@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompteDAO {
-    private static final String FIND_BY_ID_QUERY = "SELECT type FROM compte WHERE id = ?";
+    private static final String FIND_BY_ID_QUERY = "SELECT * FROM compte WHERE id = ?";
 
     public List<Compte> findAll() throws SQLException, IOException, ClassNotFoundException {
         List<Compte> list = new ArrayList<>();
@@ -37,11 +37,11 @@ public class CompteDAO {
         return list;
     }
 
-    public int getType (Integer id) throws SQLException, IOException, ClassNotFoundException {
+    public int getType(Integer id) throws SQLException, IOException, ClassNotFoundException {
         Connection connection = PersistenceManager.getConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(FIND_BY_ID_QUERY)) {
-                ps.setLong(1, id);
+                ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         int type = rs.getInt("type");
@@ -53,5 +53,22 @@ public class CompteDAO {
         }
 
         return -1;
+    }
+
+    public boolean exist(int id) throws SQLException, IOException, ClassNotFoundException  {
+        Connection connection = PersistenceManager.getConnection();
+        if (connection != null) {
+            try (PreparedStatement ps = connection.prepareStatement(FIND_BY_ID_QUERY)) {
+                ps.setInt(1, id);
+
+                try (ResultSet rs = ps.executeQuery()) {
+
+                    //return true si existe
+                    return rs.next();
+                }
+            }
+        }
+
+        return false;
     }
 }

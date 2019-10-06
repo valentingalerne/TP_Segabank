@@ -197,38 +197,135 @@ public class App {
     }
 
     private static void selectCompte() throws SQLException, IOException, ClassNotFoundException {
+        CompteEpargne compteEpargne = null;
+        CompteEpargneDAO compteEpagneDAO = new CompteEpargneDAO();
+        CompteSimple compteSimple = null;
+        CompteSimpleDAO compteSimpleDAO = new CompteSimpleDAO();
+        ComptePayant comptePayant = null;
+        ComptePayantDAO comptePayantDAO = new ComptePayantDAO();
+
+        boolean exist = false;
+        int id = 0;
+        CompteDAO compte = null;
+
         System.out.println("Liste des comptes : ");
         listComptes();
 
-        System.out.print("Saisir l'id du compte à utiliser : ");
-        int id = saisieInt();
+        while (!exist) {
+            System.out.print("Saisir l'id du compte à utiliser : ");
+            id = saisieInt();
 
-        CompteDAO compte = new CompteDAO();
-        int type = compte.getType(id);
+            compte = new CompteDAO();
 
-        while (type == -1 ) {
-            switch (type) {
-                case 1 :
-                    CompteEpargneDAO compteEpagneDAO = new CompteEpargneDAO();
-                    CompteEpargne compteEpargne = compteEpagneDAO.findById(id);
-                    break;
-                case 2 :
-                    CompteSimpleDAO compteSimpleDAO = new CompteSimpleDAO();
-                    CompteSimple compteSimple = compteSimpleDAO.findById(id);
-                    break;
-                case 3 :
-                    ComptePayantDAO comptePayantDAO = new ComptePayantDAO();
-                    ComptePayant comptePayant = comptePayantDAO.findById(id);
-                    break;
+            exist = compte.exist(id);
+            if (!exist) {
+                System.out.println("Ce compte n'existe pas !");
             }
         }
+        int type = compte.getType(id);
 
-        System.out.println("Que voulez-vous faire ?");
-        System.out.println("1 - Retrait");
-        System.out.println("2 - Virement");
-        System.out.print("Votre choix : ");
-        int choix = saisieInt();
+        switch (type) {
+             case 1 :
+                compteEpargne = compteEpagneDAO.findById(id);
+                break;
+            case 2 :
+                compteSimple = compteSimpleDAO.findById(id);
+                break;
+            case 3 :
+                comptePayant = comptePayantDAO.findById(id);
+                break;
+        }
 
+        int choix = 0;
+        while (choix != 1 && choix != 2 && choix != 3) {
+            System.out.println("Que voulez-vous faire ?");
+            System.out.println("1 - Retrait");
+            System.out.println("2 - Virement");
+            System.out.println("3 - Sortir");
+            System.out.print("Votre choix : ");
+            choix = saisieInt();
+        }
+
+        switch (choix) {
+            case 1 :
+                float retrait;
+
+                switch (type) {
+                    case 1 :
+                        System.out.print("Solde du compte : ");
+                        System.out.println(compteEpargne.getSolde());
+
+                        System.out.print("Combien voulez-vous retirer ? ");
+                        retrait = saisieFloat();
+
+                        compteEpargne.retrait(retrait);
+
+                        compteEpagneDAO.update(compteEpargne);
+                        break;
+                    case 2 :
+                        System.out.print("Solde du compte : ");
+                        System.out.println(compteSimple.getSolde());
+
+                        System.out.print("Combien voulez-vous retirer ? ");
+                        retrait = saisieFloat();
+
+                        compteSimple.retrait(retrait);
+
+                        compteSimpleDAO.update(compteSimple);
+                        break;
+                    case 3 :
+                        System.out.print("Solde du compte : ");
+                        System.out.println(comptePayant.getSolde());
+
+                        System.out.print("Combien voulez-vous retirer ? ");
+                        retrait = saisieFloat();
+
+                        comptePayant.retrait(retrait);
+
+                        comptePayantDAO.update(comptePayant);
+                        break;
+                }
+                break;
+            case 2 :
+                float virement;
+
+                switch (type) {
+                    case 1 :
+                        System.out.print("Solde du compte : ");
+                        System.out.println(compteEpargne.getSolde());
+
+                        System.out.print("Combien voulez-vous virer ? ");
+                        virement = saisieFloat();
+
+                        compteEpargne.versement(virement);
+
+                        compteEpagneDAO.update(compteEpargne);
+                        break;
+                    case 2 :
+                        System.out.print("Solde du compte : ");
+                        System.out.println(compteSimple.getSolde());
+
+                        System.out.print("Combien voulez-vous virer ? ");
+                        virement = saisieFloat();
+
+                        compteSimple.versement(virement);
+
+                        compteSimpleDAO.update(compteSimple);
+                        break;
+                    case 3 :
+                        System.out.print("Solde du compte : ");
+                        System.out.println(comptePayant.getSolde());
+
+                        System.out.print("Combien voulez-vous virer ? ");
+                        virement = saisieFloat();
+
+                        comptePayant.versement(virement);
+
+                        comptePayantDAO.update(comptePayant);
+                        break;
+                }
+                break;
+        }
     }
 
     private static void listComptes() throws SQLException, IOException, ClassNotFoundException {
