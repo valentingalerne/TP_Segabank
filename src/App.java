@@ -64,8 +64,12 @@ public class App {
                 dspMainMenu();
                 break;
             case 5:
+                getComptesByAgence();
+                dspMainMenu();
                 break;
             case 6:
+                listAgences();
+                dspMainMenu();
                 break;
         }
     }
@@ -352,16 +356,40 @@ public class App {
     private static void listComptes() throws SQLException, IOException, ClassNotFoundException {
         CompteDAO compte = new CompteDAO();
         List<Compte> list = compte.findAll();
+
+        System.out.println("Liste des comptes : ");
         for (Compte c : list) {
             System.out.println(c.toString());
         }
     }
 
-    private static void getComptesByAgence() {
+    private static void getComptesByAgence() throws SQLException, IOException, ClassNotFoundException {
+        AgenceDAO agenceDAO = new AgenceDAO();
+        List<Agence> agenceList = agenceDAO.findAll();
+
+        System.out.println("Liste des agences : ");
+        for (Agence a : agenceList) {
+            System.out.println(a.toString());
+        }
+
+        System.out.print("Choisissez l'id d'une agence : ");
+        int idAgence = saisieInt();
+        List<Compte> comptes = agenceDAO.findCompte(idAgence);
+        for (Compte c : comptes) {
+            System.out.println(c.toString());
+        }
 
     }
 
-    private static void listAgences() {
+    private static void listAgences() throws SQLException, IOException, ClassNotFoundException {
+        AgenceDAO agenceDAO = new AgenceDAO();
+        List<Agence> agenceList = agenceDAO.findAll();
+
+        System.out.println("Liste des agences : ");
+        for (Agence a : agenceList) {
+            System.out.println(a.toString());
+        }
+
 
     }
 
