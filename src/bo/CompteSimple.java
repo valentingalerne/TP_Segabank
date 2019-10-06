@@ -16,10 +16,10 @@ public class CompteSimple extends Compte {
 
     }
 
-    public CompteSimple(float solde, float decouvert) {
-        super(solde);
+    public CompteSimple(float solde, float decouvert, int idAgence) {
+        super(solde, idAgence);
         this.decouvert = decouvert;
-        setType(1);
+        setType(2);
     }
 
     @Override

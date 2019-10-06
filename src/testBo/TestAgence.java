@@ -11,9 +11,9 @@ public class TestAgence {
 
         Agence agence1;
         List<Compte> comptes = new ArrayList<>();
-        CompteEpargne compteEpargne = new CompteEpargne(4700f, 3);
-        CompteSimple compteSimple = new CompteSimple(1890f, 450f);
-        ComptePayant comptePayant = new ComptePayant(3250f);
+        CompteEpargne compteEpargne = new CompteEpargne(4700f, 3, 1);
+        CompteSimple compteSimple = new CompteSimple(1890f, 450f, 1);
+        ComptePayant comptePayant = new ComptePayant(3250f, 2);
 
         comptes.add(compteEpargne);
         comptes.add(compteSimple);

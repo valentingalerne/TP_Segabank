@@ -26,7 +26,7 @@ public class CompteSimpleDAO  implements IDAO<Integer, CompteSimple> {
                 ps.setFloat(1, compteSimple.getSolde());
                 ps.setFloat(2, compteSimple.getDecouvert());
                 ps.setInt(3, compteSimple.getType());
-                ps.setInt(3, compteSimple.getIdAgence());
+                ps.setInt(4, compteSimple.getIdAgence());
                 ps.executeUpdate();
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -79,7 +79,7 @@ public class CompteSimpleDAO  implements IDAO<Integer, CompteSimple> {
 
                         AgenceDAO agenceDAO = null;
                         Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
-                        compteSimple.setAgence(agence);
+                        compteSimple.setIdAgence(agence.getId());
                     }
                 }
             }
@@ -103,7 +103,7 @@ public class CompteSimpleDAO  implements IDAO<Integer, CompteSimple> {
 
                         AgenceDAO agenceDAO = null;
                         Agence agence = agenceDAO.findById(rs.getInt("id_agence"));
-                        compteSimple.setAgence(agence);
+                        compteSimple.setIdAgence(agence.getId());
 
                         list.add(compteSimple);
                     }

@@ -17,14 +17,15 @@ public abstract class Compte {
     private int id;
     private float solde;
     private int type;
-    private Agence agence;
+    private int idAgence;
 
     public Compte() {
 
     }
 
-    public Compte(float solde) {
+    public Compte(float solde, int idAgence) {
         this.solde = solde;
+        this.idAgence = idAgence;
     }
 
     public void versement(float montant) {
@@ -85,10 +86,6 @@ public abstract class Compte {
 //        }
     }
 
-    public int getIdAgence(){
-        return agence.getId();
-    }
-
     public int getId() {
         return id;
     }
@@ -113,11 +110,11 @@ public abstract class Compte {
         this.type = type;
     }
 
-    public Agence getAgence() {
-        return agence;
+    public int getIdAgence() {
+        return idAgence;
     }
 
-    public void setAgence(Agence agence) {
-        this.agence = agence;
+    public void setIdAgence(int idAgence) {
+        this.idAgence = idAgence;
     }
 }

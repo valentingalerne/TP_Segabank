@@ -10,7 +10,7 @@ public class TestComptePayant {
 
         System.out.println("==================================================");
         System.out.printf("%nTest unitaire - création d'un compte payant%n");
-        comptePayant = new ComptePayant(1500.00f);
+        comptePayant = new ComptePayant(1500.00f, 2);
         System.out.println(comptePayant.toString());
         System.out.println("==================================================");
 

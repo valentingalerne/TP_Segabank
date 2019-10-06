@@ -10,10 +10,10 @@ public class CompteEpargne extends Compte {
 
     }
 
-    public CompteEpargne(float solde, float tauxInteret) {
-        super(solde);
+    public CompteEpargne(float solde, float tauxInteret, int idAgence) {
+        super(solde, idAgence);
         this.tauxInteret = tauxInteret;
-        setType(3);
+        setType(1);
     }
 
     public void calculInteret() {

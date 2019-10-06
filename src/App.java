@@ -14,13 +14,12 @@ import java.util.Scanner;
 public class App {
 
     private static Scanner sc = new Scanner(System.in);
-    private static List<Compte> comptes = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
         dspMainMenu();
     }
 
-    public static void dspMainMenu() {
+    public static void dspMainMenu() throws SQLException, IOException, ClassNotFoundException {
 
         int response;
         boolean boolMainMenu = true;
@@ -74,14 +73,14 @@ public class App {
         }
     }
 
-    private static void createCompte() {
+    private static void createCompte() throws SQLException, IOException, ClassNotFoundException {
         int response;
         boolean boolMainMenu = true;
 
-        int id;
         float solde;
         float decouvert;
         float interet;
+        int idAgence;
 
         do {
             if (!boolMainMenu) {
@@ -108,40 +107,49 @@ public class App {
         switch (response) {
             case 1:
                 CompteSimple compteSimple;
+                CompteSimpleDAO compteSimpleDAO;
+
                 System.out.println("Nouveau compte simple ...");
-                System.out.print("Saisissez l'id de votre nouveau compte : ");
-                id = saisieInt();
                 System.out.print("Saisissez le solde de votre nouveau compte : ");
                 solde = saisieFloat();
                 System.out.print("Saisissez le montant du découvert : ");
                 decouvert = saisieFloat();
-                compteSimple = new CompteSimple(solde, decouvert);
+                System.out.print("Saisissez l'id de l'agence : ");
+                idAgence = saisieInt();
+                compteSimple = new CompteSimple(solde, decouvert, idAgence);
+                compteSimpleDAO = new CompteSimpleDAO();
+                compteSimpleDAO.create(compteSimple);
                 System.out.println("Nouveau compte simple créé");
-                comptes.add(compteSimple);
                 break;
             case 2:
                 CompteEpargne compteEpargne;
+                CompteEpargneDAO compteEpargneDAO;
+
                 System.out.println("Nouveau compte épargne ...");
-                System.out.print("Saisissez l'id de votre nouveau compte : ");
-                id = saisieInt();
                 System.out.print("Saisissez le solde de votre nouveau compte : ");
                 solde = saisieFloat();
                 System.out.print("Saisissez le taux d'intérêt de votre nouveau comtpe : ");
                 interet = saisieFloat();
-                compteEpargne = new CompteEpargne(solde, interet);
+                System.out.print("Saisissez l'id de l'agence : ");
+                idAgence = saisieInt();
+                compteEpargne = new CompteEpargne(solde, interet, idAgence);
+                compteEpargneDAO = new CompteEpargneDAO();
+                compteEpargneDAO.create(compteEpargne);
                 System.out.println("Nouveau compte épargne créé");
-                comptes.add(compteEpargne);
                 break;
             case 3:
                 ComptePayant comptePayant;
+                ComptePayantDAO comptePayantDAO;
+
                 System.out.println("Nouveau compte payant ...");
-                System.out.print("Saisissez l'id de votre nouveau compte : ");
-                id = saisieInt();
                 System.out.print("Saisissez le solde de votre nouveau compte : ");
                 solde = saisieFloat();
-                comptePayant = new ComptePayant(solde);
+                System.out.print("Saisissez l'id de l'agence : ");
+                idAgence = saisieInt();
+                comptePayant = new ComptePayant(solde, idAgence);
+                comptePayantDAO = new ComptePayantDAO();
+                comptePayantDAO.create(comptePayant);
                 System.out.println("Nouveau compte payant créé");
-                comptes.add(comptePayant);
                 break;
             case 4:
                 dspMainMenu();
@@ -235,7 +243,7 @@ public class App {
     }
 
     private static void listAgences() {
-        
+
     }
 
     private static float saisieFloat() {

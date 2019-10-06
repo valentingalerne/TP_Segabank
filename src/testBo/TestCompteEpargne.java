@@ -10,7 +10,7 @@ public class TestCompteEpargne {
 
         System.out.println("==================================================");
         System.out.printf("%nTest unitaire - création d'un compte épargne%n");
-        compteEpargne = new CompteEpargne(1500.00f, 10);
+        compteEpargne = new CompteEpargne(1500.00f, 10, 1);
         System.out.println(compteEpargne.toString());
         System.out.println("==================================================");
 
