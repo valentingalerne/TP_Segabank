@@ -12,9 +12,9 @@ public class CompteEpargneDAO implements IDAO<Integer, CompteEpargne> {
 
     private static final String INSERT_QUERY = "INSERT INTO compte (solde, taux_interet, type, id_agence) VALUES(?,?,?,?)";
     private static final String UPDATE_QUERY = "UPDATE compte SET solde = ?, taux_interet = ? WHERE id = ?";
-    private static final String REMOVE_QUERY = "DELETE FROM compte WHERE id = ?";
-    private static final String FIND_QUERY = "SELECT * FROM compte WHERE id = ?";
-    private static final String FIND_ALL_QUERY = "SELECT * FROM compte";
+    private static final String REMOVE_QUERY = "DELETE FROM compte WHERE id = ? AND type = 1";
+    private static final String FIND_QUERY = "SELECT * FROM compte WHERE id = ? AND type = 1";
+    private static final String FIND_ALL_QUERY = "SELECT * FROM compte WHERE type = 1";
 
     @Override
     public void create(CompteEpargne compteEpargne) throws SQLException, IOException, ClassNotFoundException {
@@ -68,7 +68,7 @@ public class CompteEpargneDAO implements IDAO<Integer, CompteEpargne> {
         Connection connection = PersistenceManager.getConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
-                ps.setLong(1, id);
+                ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         compteEpargne = new CompteEpargne();

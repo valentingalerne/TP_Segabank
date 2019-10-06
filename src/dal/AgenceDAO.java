@@ -65,7 +65,7 @@ public class AgenceDAO implements IDAO<Integer, Agence> {
         Connection connection = PersistenceManager.getConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
-                ps.setLong(1, id);
+                ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         agence = new Agence();
